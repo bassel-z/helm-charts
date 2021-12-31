@@ -1,4 +1,3 @@
-{{- if (index .Values (print .Chart.Name | replace "-" "_")).tempest.enabled }}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -11,7 +10,8 @@ spec:
   containers:
     - name: {{ .Chart.Name }}
       # As nova has no tempest plugin project we use standard tempest tests for compute -> use neutron-tempest-plugin image
-      image: {{ default "keppel.eu-de-1.cloud.sap/ccloud" .Values.global.registry}}/neutron-tempest-plugin:{{ default "latest" (index .Values (print .Chart.Name | replace "-" "_")).tempest.imageTag}}
+      # image: {{ default "keppel.eu-de-1.cloud.sap/ccloud" .Values.global.registry}}/neutron-tempest-plugin:{{ default "latest" (index .Values (print .Chart.Name | replace "-" "_")).tempest.imageTag}}
+      image: {{ default "keppel.eu-de-1.cloud.sap/ccloud" .Values.global.registry }}/{{ default .Chart.Name (index .Values (print .Chart.Name | replace "-" "_")).tempest.imageNameOverride }}-plugin-python3:{{ default "latest" (index .Values (print .Chart.Name | replace "-" "_")).tempest.imageTag}}
       command:
         - kubernetes-entrypoint
       env:
@@ -55,4 +55,3 @@ spec:
       configMap:
         name: {{ .Chart.Name }}-bin
         defaultMode: 0755
-{{- end }}
