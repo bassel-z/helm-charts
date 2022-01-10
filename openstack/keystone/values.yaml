@@ -27,6 +27,9 @@ skipRegionCheck: false
 # current keystone release
 release: train
 
+# fetch keppel images from another region
+use_alternate_registry: true
+
 ## Affinity for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 ##

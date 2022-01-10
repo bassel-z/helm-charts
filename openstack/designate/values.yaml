@@ -7,6 +7,7 @@ debug: "True"
 
 global_setup: false
 tempest_enabled: false
+use_alternate_registry: true
 
 sentry:
   enabled: true
